@@ -1,26 +1,40 @@
 #!/usr/bin/env python3
 
-import importlib, pkgutil
+import importlib, pkgutil, argparse
 from Hako import Commands
 
-import sys
-print(sys.argv)
-
 # To Do:
-# Load all commands
-# Automatically set all of them up with argparse
-# Implement directory command / run as default (no arguments)
+# Set up command-specific arguments and options with argparse
+# Pretty printing / console print colors
+# Add support for app-level commands 
+# Extract loader stuff to console kernel file and clean up this one
 
 def loadCommands(commands):
-    loaded = []
+    loaded = {}
     for (importer, modname, ispkg) in pkgutil.walk_packages(commands.__path__, commands.__name__ + '.'):
         if not ispkg:
-            cmdClass = getattr(importlib.import_module(modname), modname.split('.')[-1])
-            loaded.append({
-                'name': cmdClass.__name__,
-                'signature': cmdClass().signature,
-            })
+            module = getattr(importlib.import_module(modname), modname.split('.')[-1])
+            cmd = module()
+            loaded[cmd.signature] = {
+                'module': module,
+                'signature': cmd.signature,
+                'description': 'example description'
+            }
     return loaded
 
 
-print(loadCommands(Commands))
+cmds = loadCommands(Commands)
+
+parser = argparse.ArgumentParser(description='Zen CLI')
+parser.add_argument('command', help='Name of the command you would like to run.')
+args, unknown = parser.parse_known_args()
+# print(cmds)
+# print(args.command)
+
+try:
+    cmd = cmds[args.command]
+    # Todo: use argparse to add command-specific arguments and options here
+    cmd['module']().handle()
+except KeyError as e:
+    print('Command %s could not be found, are you sure it is registered correcty?' % (args.command))
+    # raise e
