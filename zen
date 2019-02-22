@@ -1,32 +1,39 @@
 #!/usr/bin/env python3
 
-import importlib, pkgutil, argparse
+import importlib
+import pkgutil
+import argparse
 from Hako.Console import Commands
 
 # To Do:
-# Set up command-specific arguments and options with argparse
-# Pretty printing / console print colors
-# Add support for app-level commands 
+# Use argparse to handle parsed method signatures
 # Extract loader stuff to console kernel file and clean up this one
+# Add Command base class that allows you to work with args and options
+# Add aliasing to command option signatures
+# Pretty printing / console print colors
+# Add support for app-level commands
 
-def loadCommands(commands):
+
+def load_commands(commands):
     loaded = {}
     for (importer, modname, ispkg) in pkgutil.walk_packages(commands.__path__, commands.__name__ + '.'):
         if not ispkg:
-            module = getattr(importlib.import_module(modname), modname.split('.')[-1])
-            cmd = module()
+            module = importlib.import_module(modname)
+            instance = getattr(module, modname.split('.')[-1])
+            cmd = instance()
             loaded[cmd.signature] = {
-                'module': module,
+                'module': instance,
                 'signature': cmd.signature,
                 'description': 'example description'
             }
     return loaded
 
 
-cmds = loadCommands(Commands)
+cmds = load_commands(Commands)
 
 parser = argparse.ArgumentParser(description='Zen CLI')
-parser.add_argument('command', help='Name of the command you would like to run.')
+parser.add_argument(
+    'command', help='Name of the command you would like to run.')
 args, unknown = parser.parse_known_args()
 # print(cmds)
 # print(args.command)
@@ -36,5 +43,5 @@ try:
     # Todo: use argparse to add command-specific arguments and options here
     cmd['module']().handle()
 except KeyError as e:
-    print('Command %s could not be found, are you sure it is registered correcty?' % (args.command))
-    # raise e
+    print('Command "%s" not found, is it registered?' % (args.command))
+    # raise e ?
