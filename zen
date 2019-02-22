@@ -12,11 +12,13 @@ from Hako.Console import Commands
 # Add aliasing to command option signatures
 # Pretty printing / console print colors
 # Add support for app-level commands
+# Write comments / look into python api docs
 
 
 def load_commands(commands):
     loaded = {}
-    for (importer, modname, ispkg) in pkgutil.walk_packages(commands.__path__, commands.__name__ + '.'):
+    packages = pkgutil.walk_packages(commands.__path__, commands.__name__ + '.')
+    for (importer, modname, ispkg) in packages:
         if not ispkg:
             module = importlib.import_module(modname)
             instance = getattr(module, modname.split('.')[-1])
