@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import importlib, pkgutil, argparse
-from Hako import Commands
+from Hako.Console import Commands
 
 # To Do:
 # Set up command-specific arguments and options with argparse
