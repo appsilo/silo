@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
-import importlib
-import pkgutil
 import argparse
 from Hako.Console import Commands
+from Hako.Console.Kernel import Kernel
 
 # To Do:
 # Use argparse to handle parsed method signatures
@@ -13,25 +12,7 @@ from Hako.Console import Commands
 # Pretty printing / console print colors
 # Add support for app-level commands
 # Write comments / look into python api docs
-
-
-def load_commands(commands):
-    loaded = {}
-    packages = pkgutil.walk_packages(commands.__path__, commands.__name__ + '.')
-    for (importer, modname, ispkg) in packages:
-        if not ispkg:
-            module = importlib.import_module(modname)
-            instance = getattr(module, modname.split('.')[-1])
-            cmd = instance()
-            loaded[cmd.signature] = {
-                'module': instance,
-                'signature': cmd.signature,
-                'description': 'example description'
-            }
-    return loaded
-
-
-cmds = load_commands(Commands)
+cmds = Kernel(__file__).load_commands(Commands)
 
 parser = argparse.ArgumentParser(description='Zen CLI')
 parser.add_argument(
