@@ -1,30 +1,13 @@
 #!/usr/bin/env python3
 
-import argparse
-from Hako.Console import Commands
 from Hako.Console.Kernel import Kernel
 
 # To Do:
-# Use argparse to handle parsed method signatures
-# Extract loader stuff to console kernel file and clean up this one
-# Add Command base class that allows you to work with args and options
+# Handle commands with the second layer of parsed arguments/options
+# Add Command base class that allows you to work with those args and options
 # Add aliasing to command option signatures
-# Pretty printing / console print colors
-# Add support for app-level commands
-# Write comments / look into python api docs
-cmds = Kernel(__file__).load_commands(Commands)
-
-parser = argparse.ArgumentParser(description='Zen CLI')
-parser.add_argument(
-    'command', help='Name of the command you would like to run.')
-args, unknown = parser.parse_known_args()
-# print(cmds)
-# print(args.command)
-
-try:
-    cmd = cmds[args.command]
-    # Todo: use argparse to add command-specific arguments and options here
-    cmd['module']().handle()
-except KeyError as e:
-    print('Command "%s" not found, is it registered?' % (args.command))
-    # raise e ?
+# Split loader stuff to its own class/tests?
+# Write comments / look into python api docs / docblock
+# Ability to prompt for user input?
+# Pretty printing / console print colors from commands, self.info, self.warn etc
+Kernel(__file__).handle()
