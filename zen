@@ -3,11 +3,9 @@
 from Hako.Console.Kernel import Kernel
 
 # To Do:
-# Handle commands with the second layer of parsed arguments/options
-# Add Command base class that allows you to work with those args and options
 # Add aliasing to command option signatures
 # Split loader stuff to its own class/tests?
 # Write comments / look into python api docs / docblock
-# Ability to prompt for user input?
+# Ability to prompt for user input in command
 # Pretty printing / console print colors from commands, self.info, self.warn etc
 Kernel(__file__).handle()
