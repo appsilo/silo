@@ -4,8 +4,9 @@ from Hako.Console.Kernel import Kernel
 
 # To Do:
 # ----------------------------------------------------------------------------
-# - Prompting for user input
 # - Command output
+# - hasOption / hasArgument
+# - flag-based options with no value
 # - Call commands from other commands
 
 # Cleanup / Documentation / Improvements:
