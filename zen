@@ -2,17 +2,15 @@
 
 from Hako.Console.Kernel import Kernel
 
+# Here we'll spin up a new CLI instance and match user input to commands
+Kernel(__file__).handle()
+
 # To Do:
 # ----------------------------------------------------------------------------
-# - flag-based options with no value
 # - Call commands from other commands
 
 # Cleanup / Documentation / Improvements:
 # ----------------------------------------------------------------------------
 # - Improve tests / split into own files
+# - Write comments / docstrings
 # - Split loader stuff to its own class/tests?
-# - Pretty printing / print colors from commands, self.info, self.warn etc
-# - Write comments / look into python api docs / docblock
-# - Table output
-
-Kernel(__file__).handle()
