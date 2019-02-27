@@ -3,9 +3,17 @@
 from Hako.Console.Kernel import Kernel
 
 # To Do:
-# Add aliasing to command option signatures
-# Split loader stuff to its own class/tests?
-# Write comments / look into python api docs / docblock
-# Ability to prompt for user input in command
-# Pretty printing / console print colors from commands, self.info, self.warn etc
+# ----------------------------------------------------------------------------
+# - Prompting for user input
+# - Command output
+# - Call commands from other commands
+
+# Cleanup / Documentation / Improvements:
+# ----------------------------------------------------------------------------
+# - Improve tests / split into own files
+# - Split loader stuff to its own class/tests?
+# - Pretty printing / print colors from commands, self.info, self.warn etc
+# - Write comments / look into python api docs / docblock
+# - Table output
+
 Kernel(__file__).handle()
