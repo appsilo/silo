@@ -3,7 +3,7 @@
 from Hako.Console.Kernel import Kernel
 
 # Here we'll spin up a new CLI instance and match user input to commands
-Kernel(__file__).handle()
+Kernel(__file__).run()
 
 # To Do:
 # ----------------------------------------------------------------------------
