@@ -4,13 +4,3 @@ from Hako.Console.Kernel import Kernel
 
 # Here we'll spin up a new CLI instance and match user input to commands
 Kernel(__file__).run()
-
-# To Do:
-# ----------------------------------------------------------------------------
-# - Call commands from other commands
-
-# Cleanup / Documentation / Improvements:
-# ----------------------------------------------------------------------------
-# - Improve tests / split into own files
-# - Write comments / docstrings
-# - Split loader stuff to its own class/tests?
