@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from Hako.Console.Kernel import Kernel
+from Silo.Console.Kernel import Kernel
 
 # Here we'll spin up a new CLI instance and match user input to commands
 Kernel(__file__).run()

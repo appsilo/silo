@@ -1,4 +1,4 @@
-from Hako.Routing import Route
+from Silo.Routing import Route
 
 routes = [
     Route().get('/', 'home_controller@index'),

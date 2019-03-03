@@ -1,4 +1,4 @@
-from Hako.App import App
+from Silo.App import App
 from routes import routes
 
 if __name__ == '__main__':
